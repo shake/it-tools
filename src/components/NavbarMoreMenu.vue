@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useThemeVars } from 'naive-ui';
 import { storeToRefs } from 'pinia';
-import { IconDotsVertical, IconLogout, IconMoon, IconSun } from '@tabler/icons-vue';
+import { IconDotsVertical, IconInfoCircle, IconLogout, IconMoon, IconSun } from '@tabler/icons-vue';
+import { RouterLink } from 'vue-router';
 import { useStyleStore } from '@/stores/style.store';
 
 const styleStore = useStyleStore();
@@ -71,6 +72,11 @@ onClickOutside(menuRef, closeMenu);
           <span>{{ $t('home.nav.darkMode') }}</span>
         </button>
 
+        <RouterLink class="menu-option about" to="/about" @click="closeMenu">
+          <n-icon size="20" :component="IconInfoCircle" />
+          <span>{{ $t('home.nav.aboutLabel') }}</span>
+        </RouterLink>
+
         <div class="divider" />
 
         <button class="menu-option logout" type="button" @click="logout">
@@ -126,6 +132,10 @@ onClickOutside(menuRef, closeMenu);
   &.active {
     background: rgba(255, 217, 102, 0.18);
   }
+}
+
+.about {
+  text-decoration: none;
 }
 
 .logout {

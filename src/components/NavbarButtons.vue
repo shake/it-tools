@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconBrandGithub, IconInfoCircle } from '@tabler/icons-vue';
+import { IconBrandGithub } from '@tabler/icons-vue';
 </script>
 
 <template>
@@ -15,12 +15,6 @@ import { IconBrandGithub, IconInfoCircle } from '@tabler/icons-vue';
         :aria-label="$t('home.nav.githubRepository')"
       >
         <n-icon size="20" :component="IconBrandGithub" />
-      </c-button>
-    </c-tooltip>
-
-    <c-tooltip :tooltip="$t('home.nav.about')" position="bottom">
-      <c-button circle size="small" variant="text" to="/about" :aria-label="$t('home.nav.aboutLabel')">
-        <n-icon size="20" :component="IconInfoCircle" />
       </c-button>
     </c-tooltip>
   </div>
