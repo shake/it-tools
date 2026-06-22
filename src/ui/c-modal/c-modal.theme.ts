@@ -8,4 +8,7 @@ export const { useTheme } = defineThemes({
   light: {
     background: appThemes.light.background,
   },
+  warm: {
+    background: appThemes.warm.background,
+  },
 });

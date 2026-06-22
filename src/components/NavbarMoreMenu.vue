@@ -6,8 +6,9 @@ import { RouterLink } from 'vue-router';
 import { useStyleStore } from '@/stores/style.store';
 
 const styleStore = useStyleStore();
-const { isDarkTheme } = storeToRefs(styleStore);
+const { isDarkTheme, themeMode } = storeToRefs(styleStore);
 const theme = useThemeVars();
+const menuPanelBackground = computed(() => (themeMode.value === 'warm' ? '#fff7e5' : theme.bodyColor));
 
 const isOpen = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
@@ -21,18 +22,17 @@ function toggleMenu() {
 }
 
 function setLightTheme() {
-  if (isDarkTheme.value) {
-    styleStore.toggleDark();
-  }
+  styleStore.setTheme('light');
+  closeMenu();
+}
 
+function setWarmTheme() {
+  styleStore.setTheme('warm');
   closeMenu();
 }
 
 function setDarkTheme() {
-  if (!isDarkTheme.value) {
-    styleStore.toggleDark();
-  }
-
+  styleStore.setTheme('dark');
   closeMenu();
 }
 
@@ -62,9 +62,14 @@ onClickOutside(menuRef, closeMenu);
           {{ $t('home.nav.themeTitle') }}
         </div>
 
-        <button class="menu-option" :class="{ active: !isDarkTheme }" type="button" @click="setLightTheme">
+        <button class="menu-option" :class="{ active: themeMode === 'light' }" type="button" @click="setLightTheme">
           <n-icon size="20" :component="IconSun" />
           <span>{{ $t('home.nav.lightMode') }}</span>
+        </button>
+
+        <button class="menu-option" :class="{ active: themeMode === 'warm' }" type="button" @click="setWarmTheme">
+          <n-icon size="20" :component="IconSun" />
+          <span>{{ $t('home.nav.warmMode') }}</span>
         </button>
 
         <button class="menu-option" :class="{ active: isDarkTheme }" type="button" @click="setDarkTheme">
@@ -101,7 +106,7 @@ onClickOutside(menuRef, closeMenu);
   min-width: 205px;
   padding: 16px 10px 12px;
   border-radius: 26px;
-  background: v-bind('theme.bodyColor');
+  background: v-bind('menuPanelBackground');
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(127, 127, 127, 0.14);
 }
@@ -130,7 +135,7 @@ onClickOutside(menuRef, closeMenu);
 
   &:hover,
   &.active {
-    background: rgba(255, 217, 102, 0.18);
+    background: rgba(192, 138, 39, 0.18);
   }
 }
 

@@ -34,4 +34,18 @@ export const { useTheme } = defineThemes({
       icon: ErrorIcon,
     },
   },
+  warm: {
+    warning: {
+      backgroundColor: appThemes.warm.warning.colorFaded,
+      borderColor: appThemes.warm.warning.color,
+      textColor: darken(appThemes.warm.warning.color, 32),
+      icon: WarningIcon,
+    },
+    error: {
+      backgroundColor: appThemes.warm.error.colorFaded,
+      borderColor: appThemes.warm.error.color,
+      textColor: darken(appThemes.warm.error.color, 32),
+      icon: ErrorIcon,
+    },
+  },
 });

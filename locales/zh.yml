@@ -30,6 +30,7 @@ home:
     aboutLabel: '关于'
     darkMode: '深色模式'
     lightMode: '浅色模式'
+    warmMode: '暖色模式'
     mode: '颜色模式'
     more: '更多'
     themeTitle: '主题切换'

@@ -57,4 +57,24 @@ export const { useTheme } = defineThemes({
       backgroundColor: '#ffffff',
     },
   },
+  warm: {
+    sizes,
+
+    backgroundColor: '#fffaf0',
+    borderColor: '#e6d4ab',
+    dropdownShadow: 'rgba(124, 97, 49, 0.16) 0px 8px 24px',
+
+    option: {
+      hover: {
+        backgroundColor: '#f4e7c8',
+      },
+      active: {
+        textColor: appThemes.warm.primary.color,
+      },
+    },
+
+    focus: {
+      backgroundColor: '#fffaf0',
+    },
+  },
 });

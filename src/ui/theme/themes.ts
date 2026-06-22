@@ -37,6 +37,42 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
       colorFaded: '#d030502a',
     },
   },
+  warm: {
+    background: '#f4e8c8',
+    text: {
+      baseColor: '#433121',
+      mutedColor: '#7b6b55',
+    },
+    default: {
+      color: 'rgba(67, 49, 33, 0.06)',
+      colorHover: 'rgba(67, 49, 33, 0.1)',
+      colorPressed: 'rgba(67, 49, 33, 0.2)',
+    },
+    primary: {
+      color: '#c08a27',
+      colorHover: '#d39b38',
+      colorPressed: '#a36f19',
+      colorFaded: '#c08a2730',
+    },
+    warning: {
+      color: '#b46a1d',
+      colorHover: '#c17921',
+      colorPressed: '#9c5a14',
+      colorFaded: '#b46a1d2f',
+    },
+    success: {
+      color: '#5f8453',
+      colorHover: '#6e935e',
+      colorPressed: '#4c6f43',
+      colorFaded: '#5f84532f',
+    },
+    error: {
+      color: '#b15b5b',
+      colorHover: '#c46b6b',
+      colorPressed: '#984d4d',
+      colorFaded: '#b15b5b2a',
+    },
+  },
   dark: {
     background: '#1e1e1e',
     text: {

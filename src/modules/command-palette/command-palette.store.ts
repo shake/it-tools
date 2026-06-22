@@ -6,6 +6,7 @@ import { useFuzzySearch } from '@/composable/fuzzySearch';
 import { useStyleStore } from '@/stores/style.store';
 
 import SunIcon from '~icons/mdi/white-balance-sunny';
+import MoonIcon from '~icons/mdi/weather-night';
 import GithubIcon from '~icons/mdi/github';
 import BugIcon from '~icons/mdi/bug-outline';
 import DiceIcon from '~icons/mdi/dice-5';
@@ -39,12 +40,31 @@ export const useCommandPaletteStore = defineStore('command-palette', () => {
       closeOnSelect: true,
     },
     {
-      name: 'Toggle dark mode',
-      description: 'Toggle dark mode on or off.',
-      action: () => styleStore.toggleDark(),
+      name: 'Light mode',
+      description: 'Switch the interface to the light theme.',
+      action: () => styleStore.setTheme('light'),
       icon: SunIcon,
       category: 'Actions',
-      keywords: ['dark', 'theme', 'toggle', 'mode', 'light', 'system'],
+      keywords: ['light', 'theme', 'mode', 'bright'],
+      closeOnSelect: true,
+    },
+    {
+      name: 'Warm mode',
+      description: 'Switch the interface to the warm parchment theme.',
+      action: () => styleStore.setTheme('warm'),
+      icon: SunIcon,
+      category: 'Actions',
+      keywords: ['warm', 'paper', 'parchment', 'theme', 'mode'],
+      closeOnSelect: true,
+    },
+    {
+      name: 'Dark mode',
+      description: 'Switch the interface to the dark theme.',
+      action: () => styleStore.setTheme('dark'),
+      icon: MoonIcon,
+      category: 'Actions',
+      keywords: ['dark', 'theme', 'toggle', 'mode', 'night'],
+      closeOnSelect: true,
     },
     {
       name: 'Github repository',
