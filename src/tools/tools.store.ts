@@ -60,8 +60,13 @@ async function saveFavoriteToolPaths(paths: string[]) {
 }
 
 function queueFavoritePersistence() {
+  const currentFavoriteToolPaths = normalizeFavoriteToolPaths(favoriteToolPaths.value);
+
   favoritePersistenceQueue = favoritePersistenceQueue.then(async () => {
-    const currentFavoriteToolPaths = normalizeFavoriteToolPaths(favoriteToolPaths.value);
+    if (favoriteSyncMode.value === 'loading') {
+      await hydrateFavoriteToolPaths();
+      favoriteToolPaths.value = currentFavoriteToolPaths;
+    }
 
     if (favoriteSyncMode.value !== 'remote') {
       writeCachedFavoriteToolPaths(currentFavoriteToolPaths);

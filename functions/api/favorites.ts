@@ -1,5 +1,6 @@
 import { getAuthenticatedUserId, normalizeStoredFavoriteToolPaths } from '../_lib/favorites';
 import type { D1Database } from '../_lib/d1';
+import type { PluginData } from '@cloudflare/pages-plugin-cloudflare-access';
 
 type Env = {
   DB: D1Database;
@@ -42,8 +43,8 @@ async function saveFavoriteToolPaths(env: Env, userId: string, favoriteToolPaths
   return normalizedFavoriteToolPaths;
 }
 
-export async function onRequestGet({ request, env }: { request: Request; env: Env }) {
-  const userId = getAuthenticatedUserId(request);
+export async function onRequestGet({ request, env, data }: { request: Request; env: Env; data: PluginData }) {
+  const userId = getAuthenticatedUserId(request, data);
 
   if (!userId) {
     return json({ error: 'Unauthorized' }, { status: 401 });
@@ -54,8 +55,8 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   return json({ favoriteToolPaths });
 }
 
-export async function onRequestPut({ request, env }: { request: Request; env: Env }) {
-  const userId = getAuthenticatedUserId(request);
+export async function onRequestPut({ request, env, data }: { request: Request; env: Env; data: PluginData }) {
+  const userId = getAuthenticatedUserId(request, data);
 
   if (!userId) {
     return json({ error: 'Unauthorized' }, { status: 401 });
