@@ -36,7 +36,7 @@ function setDarkTheme() {
 }
 
 function logout() {
-  window.location.assign(new URL('/cdn-cgi/access/logout', window.location.origin).toString());
+  window.location.assign(new URL('/logout', window.location.origin).toString());
 }
 
 onClickOutside(menuRef, closeMenu);
