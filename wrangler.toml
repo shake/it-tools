@@ -1,0 +1,8 @@
+name = "it-tools"
+compatibility_date = "2026-06-22"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "it-tools-favorites"
+database_id = "771ebf21-67b4-481a-a542-437c7ed64a87"

@@ -18,6 +18,17 @@ You have an idea of a tool? Submit a [feature request](https://github.com/Corent
 
 Self host solutions for your homelab
 
+**Cloudflare Pages + Access**
+
+This repo also works as a Cloudflare-hosted static app. Build with `pnpm build`, deploy the `dist/` output to Cloudflare Pages, and attach a D1 database for favorites persistence.
+
+Recommended setup:
+
+- Protect the Pages hostname with Cloudflare Access.
+- Allow only the IdP groups or email domains you want to use the app.
+- Bind a D1 database named `it-tools-favorites` to the Pages project.
+- Keep the SPA fallback enabled so direct tool URLs refresh correctly.
+
 **From docker hub:**
 
 ```sh
