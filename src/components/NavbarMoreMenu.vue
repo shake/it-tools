@@ -51,7 +51,7 @@ onClickOutside(menuRef, closeMenu);
         :aria-label="$t('home.nav.more')"
         @click="toggleMenu"
       >
-        <n-icon size="25" :component="IconDotsVertical" />
+        <n-icon size="22" :component="IconDotsVertical" />
       </c-button>
     </c-tooltip>
 
@@ -92,9 +92,9 @@ onClickOutside(menuRef, closeMenu);
   top: calc(100% + 12px);
   right: 0;
   z-index: 30;
-  min-width: 220px;
-  padding: 18px 12px 14px;
-  border-radius: 28px;
+  min-width: 205px;
+  padding: 16px 10px 12px;
+  border-radius: 26px;
   background: v-bind('theme.bodyColor');
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(127, 127, 127, 0.14);
@@ -102,24 +102,24 @@ onClickOutside(menuRef, closeMenu);
 
 .menu-title {
   color: rgba(127, 127, 127, 0.95);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  padding: 0 12px 10px;
+  padding: 0 12px 8px;
 }
 
 .menu-option {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   background: transparent;
   color: inherit;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   text-align: left;
-  padding: 14px 12px;
+  padding: 12px 12px;
   cursor: pointer;
 
   &:hover,
@@ -134,7 +134,7 @@ onClickOutside(menuRef, closeMenu);
 
 .divider {
   height: 1px;
-  margin: 10px 8px 8px;
+  margin: 8px 8px 6px;
   background: rgba(127, 127, 127, 0.18);
 }
 

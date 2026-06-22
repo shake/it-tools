@@ -89,7 +89,7 @@ const tools = computed<ToolCategory[]>(() => [
     </template>
 
     <template #content>
-      <div flex items-center justify-center gap-2>
+      <div class="top-right-actions" flex items-center justify-center gap-1>
         <c-button
           circle
           variant="text"
@@ -186,5 +186,9 @@ const tools = computed<ToolCategory[]>(() => [
       font-size: 16px;
     }
   }
+}
+
+.top-right-actions {
+  gap: 6px;
 }
 </style>
