@@ -27,6 +27,9 @@ home:
     darkMode: 'Dark mode'
     lightMode: 'Light mode'
     mode: 'Toggle dark/light mode'
+    more: 'More'
+    themeTitle: 'Theme switch'
+    logout: 'Logout'
 about:
   content: >
     # About IT-Tools
