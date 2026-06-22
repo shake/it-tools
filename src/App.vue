@@ -13,10 +13,15 @@ const theme = computed(() => (styleStore.isDarkTheme ? darkTheme : null));
 const themeOverrides = computed(() => (styleStore.isDarkTheme ? darkThemeOverrides : lightThemeOverrides));
 
 const { locale } = useI18n();
+const localeStorage = useStorage('locale', 'zh');
+
+if (!['zh', 'en'].includes(localeStorage.value)) {
+  localeStorage.value = 'zh';
+}
 
 syncRef(
   locale,
-  useStorage('locale', locale),
+  localeStorage,
 );
 </script>
 

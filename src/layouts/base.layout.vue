@@ -96,18 +96,18 @@ const tools = computed<ToolCategory[]>(() => [
           :aria-label="$t('home.toggleMenu')"
           @click="styleStore.isMenuCollapsed = !styleStore.isMenuCollapsed"
         >
-          <NIcon size="25" :component="Menu2" />
+          <NIcon size="22" :component="Menu2" />
         </c-button>
 
         <c-tooltip :tooltip="$t('home.home')" position="bottom">
           <c-button to="/" circle variant="text" :aria-label="$t('home.home')">
-            <NIcon size="25" :component="Home2" />
+            <NIcon size="22" :component="Home2" />
           </c-button>
         </c-tooltip>
 
         <c-tooltip :tooltip="$t('home.uiLib')" position="bottom">
           <c-button v-if="config.app.env === 'development'" to="/c-lib" circle variant="text" :aria-label="$t('home.uiLib')">
-            <icon-mdi:brush-variant text-20px />
+            <icon-mdi:brush-variant text-18px />
           </c-button>
         </c-tooltip>
 
@@ -189,6 +189,6 @@ const tools = computed<ToolCategory[]>(() => [
 }
 
 .top-right-actions {
-  gap: 6px;
+  gap: 4px;
 }
 </style>
