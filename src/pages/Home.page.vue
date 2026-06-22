@@ -80,7 +80,7 @@ function onUpdateFavoriteTools() {
       </div>
 
       <template v-if="isAllTab">
-        <div class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <ColoredCard v-if="config.showBanner" :title="$t('home.follow.title')" :icon="IconHeart">
             {{ $t('home.follow.p1') }}
             <a
@@ -111,7 +111,7 @@ function onUpdateFavoriteTools() {
             </h3>
             <Draggable
               :list="favoriteTools"
-              class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4"
+              class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
               ghost-class="ghost-favorites-draggable"
               item-key="name"
               @end="onUpdateFavoriteTools"
@@ -127,7 +127,7 @@ function onUpdateFavoriteTools() {
           <h3 class="section-title">
             {{ t('home.categories.newestTools') }}
           </h3>
-          <div class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
+          <div class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             <ToolCard v-for="tool in toolStore.newTools" :key="tool.name" :tool="tool" />
           </div>
         </div>
@@ -135,7 +135,7 @@ function onUpdateFavoriteTools() {
         <h3 class="section-title">
           {{ $t('home.categories.allTools') }}
         </h3>
-        <div class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <ToolCard v-for="tool in toolStore.tools" :key="tool.name" :tool="tool" />
         </div>
       </template>
@@ -152,7 +152,7 @@ function onUpdateFavoriteTools() {
           <div v-if="toolStore.favoriteTools.length > 0">
             <Draggable
               :list="favoriteTools"
-              class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4"
+              class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
               ghost-class="ghost-favorites-draggable"
               item-key="name"
               @end="onUpdateFavoriteTools"
@@ -172,7 +172,7 @@ function onUpdateFavoriteTools() {
         <h3 class="section-title">
           {{ currentTabLabel }}
         </h3>
-        <div class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid grid-cols-1 gap-12px sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <ToolCard v-for="tool in categoryTools" :key="tool.name" :tool="tool" />
         </div>
       </template>

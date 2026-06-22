@@ -55,6 +55,7 @@ export default defineConfig({
     svgLoader(),
     VitePWA({
       registerType: 'autoUpdate',
+      useCredentials: true,
       strategies: 'generateSW',
       manifest: {
         name: 'IT Tools',

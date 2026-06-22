@@ -24,15 +24,14 @@ function toggleFavorite(event: MouseEvent) {
 </script>
 
 <template>
-  <c-tooltip :tooltip="isFavorite ? $t('favoriteButton.remove') : $t('favoriteButton.add') ">
-    <c-button
-      variant="text"
-      circle
-      :type="buttonType"
-      :style="{ opacity: isFavorite ? 1 : 0.2 }"
-      @click="toggleFavorite"
-    >
-      <icon-mdi-heart />
-    </c-button>
-  </c-tooltip>
+  <c-button
+    variant="text"
+    circle
+    :type="buttonType"
+    :style="{ opacity: isFavorite ? 1 : 0.2 }"
+    :aria-label="isFavorite ? $t('favoriteButton.remove') : $t('favoriteButton.add')"
+    @click="toggleFavorite"
+  >
+    <icon-mdi-pin />
+  </c-button>
 </template>
