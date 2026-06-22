@@ -3,6 +3,7 @@ import { layouts } from './layouts/index';
 import HomePage from './pages/Home.page.vue';
 import NotFound from './pages/404.page.vue';
 import { tools } from './tools';
+import { isToolDirectoryCategorySlug } from './tools/directory';
 import { config } from './config';
 import { routes as demoRoutes } from './ui/demo/demo.routes';
 
@@ -25,6 +26,25 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomePage,
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: HomePage,
+    },
+    {
+      path: '/category/:slug',
+      name: 'category',
+      component: HomePage,
+      beforeEnter: (to) => {
+        const slug = Array.isArray(to.params.slug) ? to.params.slug[0] : to.params.slug;
+
+        if (typeof slug === 'string' && isToolDirectoryCategorySlug(slug)) {
+          return true;
+        }
+
+        return { name: 'NotFound' };
+      },
     },
     {
       path: '/about',

@@ -4,6 +4,10 @@ home:
     favoriteTools: '我的收藏'
     allTools: '全部工具'
     favoritesDndToolTip: '拖放重新排列收藏夹'
+  directory:
+    all: '全部'
+    favorites: '常用'
+    emptyFavorites: '还没有收藏工具，先点工具卡片右上角的爱心试试。'
   subtitle: '助力开发人员和 IT 工作者'
   toggleMenu: '切换菜单'
   home: '主页'
