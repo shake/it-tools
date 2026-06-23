@@ -18,22 +18,18 @@
 - Cloudflare Access 负责登录控制
 - Cloudflare D1 负责收藏持久化
 
-### 快速开始
+### 最短部署步骤
 
-1. 在 Cloudflare Pages 创建项目
-2. 构建目录选择 `dist`
-3. 绑定 D1 数据库 `it-tools-favorites`
-4. 如需访问控制，在 Zero Trust 里创建 Access self-hosted app
-5. 在 Access 中添加允许访问的邮箱或邮箱组
-6. 使用自定义域名，或直接使用 `*.pages.dev`
+1. 在 Cloudflare Pages 创建项目，构建目录选 `dist`
+2. 绑定 D1 数据库 `it-tools-favorites`
+3. 如需登录控制，在 Zero Trust 里创建 Access self-hosted app
+4. 在 Access 中添加允许访问的邮箱或邮箱组
+5. 绑定自定义域名，或直接使用 `*.pages.dev`
 
 ### 不启用 Access 时
 
-不启用 Access 也可以正常部署和访问，只是会少掉这些能力：
+不启用 Access 也可以直接使用，只是会少掉这些能力：
 
 - `/api/me` 会返回 `401`
 - `/api/favorites` 会返回 `401`
-- 收藏只能保存在本地浏览器
-- 更换浏览器或设备后，收藏不会同步
-
-如果你的需求只是公开展示页面，或者暂时不需要跨设备收藏同步，这种方式也可以直接使用。
+- 收藏只能保存在本地浏览器，不能跨浏览器同步
