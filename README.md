@@ -12,23 +12,19 @@
 
 ## Cloudflare 部署
 
-这个 fork 已经整理成适合 Cloudflare 的部署方式：
-
-- Cloudflare Pages 负责静态站点托管
-- Cloudflare Access 负责登录控制
-- Cloudflare D1 负责收藏持久化
+这个 fork 已经整理成适合 Cloudflare 的部署方式。
 
 ### 最短部署步骤
 
-1. 在 Cloudflare Pages 创建项目，构建目录选 `dist`
-2. 绑定 D1 数据库 `it-tools-favorites`
-3. 如需登录控制，在 Zero Trust 里创建 Access self-hosted app
-4. 在 Access 中添加允许访问的邮箱或邮箱组
-5. 绑定自定义域名，或直接使用 `*.pages.dev`
+1. 准备一个 Cloudflare 账号
+2. 准备一个用于登录的邮箱
+3. 把这个 repo 链接给 Codex，并启用 Cloudflare 插件
+4. 让 Codex 代你完成 Pages、Access 和 D1 的配置
+5. 部署完成后，用你的邮箱登录即可
 
-### 不启用 Access 时
+### 手工部署时
 
-不启用 Access 也可以直接使用，只是会少掉这些能力：
+如果你想自己手工部署，也可以继续用 Cloudflare Pages + Access + D1：
 
 - `/api/me` 会返回 `401`
 - `/api/favorites` 会返回 `401`
