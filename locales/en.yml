@@ -4,6 +4,10 @@ home:
     favoriteTools: 'Your favorite tools'
     allTools: 'All the tools'
     favoritesDndToolTip: 'Drag and drop to reorder favorites'
+  directory:
+    all: 'All'
+    favorites: 'Favorites'
+    emptyFavorites: 'You do not have any favorites yet. Try the heart icon on a tool card.'
   subtitle: 'Handy tools for developers'
   toggleMenu: 'Toggle menu'
   home: Home
@@ -26,7 +30,8 @@ home:
     aboutLabel: 'About'
     darkMode: 'Dark mode'
     lightMode: 'Light mode'
-    mode: 'Toggle dark/light mode'
+    warmMode: 'Warm mode'
+    mode: 'Theme switch'
     more: 'More'
     themeTitle: 'Theme switch'
     logout: 'Logout'

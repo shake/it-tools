@@ -17,4 +17,12 @@ export const { useTheme } = defineThemes({
       backgroundColor: '#ffffff',
     },
   },
+  warm: {
+    backgroundColor: '#fffaf0',
+    borderColor: '#e6d4ab',
+
+    focus: {
+      backgroundColor: '#fffaf0',
+    },
+  },
 });

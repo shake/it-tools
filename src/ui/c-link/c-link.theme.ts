@@ -36,4 +36,21 @@ export const { useTheme } = defineThemes({
       },
     },
   },
+  warm: {
+    default: {
+      textColor: appThemes.warm.primary.color,
+
+      hover: {
+        textColor: appThemes.warm.primary.colorHover,
+      },
+
+      pressed: {
+        textColor: appThemes.warm.primary.colorPressed,
+      },
+
+      outline: {
+        color: appThemes.warm.primary.color,
+      },
+    },
+  },
 });

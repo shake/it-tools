@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NIcon, useThemeVars } from 'naive-ui';
+import { NIcon } from 'naive-ui';
 
 import { RouterLink } from 'vue-router';
 import { Home2, Menu2 } from '@vicons/tabler';
@@ -15,7 +15,6 @@ import type { ToolCategory } from '@/tools/tools.types';
 import { useToolStore } from '@/tools/tools.store';
 import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
 
-const themeVars = useThemeVars();
 const styleStore = useStyleStore();
 const version = config.app.version;
 const commitSha = config.app.lastCommitSha.slice(0, 7);
@@ -39,10 +38,6 @@ const tools = computed<ToolCategory[]>(() => [
         <div class="text-wrapper">
           <div class="title">
             IT - TOOLS
-          </div>
-          <div class="divider" />
-          <div class="subtitle">
-            {{ $t('home.subtitle') }}
           </div>
         </div>
       </RouterLink>
@@ -167,23 +162,12 @@ const tools = computed<ToolCategory[]>(() => [
     width: 100%;
     text-align: center;
     top: 16px;
-    color: #fff;
+    color: #433121;
 
     .title {
       font-size: 25px;
-      font-weight: 600;
-    }
-
-    .divider {
-      width: 50px;
-      height: 2px;
-      border-radius: 4px;
-      background-color: v-bind('themeVars.primaryColor');
-      margin: 0 auto 5px;
-    }
-
-    .subtitle {
-      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
     }
   }
 }

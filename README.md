@@ -1,3 +1,5 @@
+![IT Tools 首页效果](./.github/screenshots/homepage-effect.png)
+
 <picture>
     <source srcset="./.github/logo-dark.png" media="(prefers-color-scheme: light)">
     <source srcset="./.github/logo-white.png" media="(prefers-color-scheme: dark)">
@@ -5,60 +7,165 @@
 </picture>
 
 <p align="center">
-Useful tools for developer and people working in IT. <a href="https://it-tools.tech">Try it!</a>
+面向开发者和 IT 工作者的实用工具集合。<a href="https://it-tools.tech">在线体验</a>
 </p>
 
-## Functionalities and roadmap
+## 简介
 
-Please check the [issues](https://github.com/CorentinTh/it-tools/issues) to see if some feature listed to be implemented.
+IT-Tools 是一个基于 Vue 3 构建的在线工具集合，适合开发、排查、转换、格式化等日常场景。
 
-You have an idea of a tool? Submit a [feature request](https://github.com/CorentinTh/it-tools/issues/new/choose)!
+本仓库当前版本已经做了这些改动：
 
-## Self host
+- 首页改造成路由驱动的分类目录页
+- 顶部分类切换支持：
+  - `全部`
+  - `常用`
+  - 各个工具分类
+- `常用` 直接对应收藏工具
+- 收藏数据改为 Cloudflare D1 持久化
+- 登录与访问控制改为 Cloudflare Access
+- 支持部署到 Cloudflare Pages
 
-Self host solutions for your homelab
+## 线上部署
 
-**Cloudflare Pages + Access**
+当前推荐的部署方式是：
 
-This repo also works as a Cloudflare-hosted static app. Build with `pnpm build`, deploy the `dist/` output to Cloudflare Pages, and attach a D1 database for favorites persistence.
+- Cloudflare Pages 负责静态站点托管
+- Cloudflare Access 负责登录控制
+- Cloudflare D1 负责收藏持久化
 
-Recommended setup:
+生产环境通常会包含以下内容：
 
-- Protect the Pages hostname with Cloudflare Access.
-- Allow only the IdP groups or email domains you want to use the app.
-- Bind a D1 database named `it-tools-favorites` to the Pages project.
-- Keep the SPA fallback enabled so direct tool URLs refresh correctly.
+- `/`：全部工具页
+- `/favorites`：常用 / 收藏页
+- `/category/:slug`：单个分类页
+- `/api/me`：当前登录身份
+- `/api/favorites`：收藏读取与保存
 
-**From docker hub:**
+## 目录页说明
+
+首页顶部的分类 tabs 作用如下：
+
+- `全部`
+  - 保留原有首页结构
+  - 显示介绍内容、最新工具、全部工具
+- `常用`
+  - 直接显示收藏工具
+  - 收藏顺序可拖拽调整
+- 其它分类
+  - 只显示对应分类下的工具
+  - 页面可直接分享和刷新
+
+## 收藏功能
+
+收藏功能已经从纯本地存储改成远端同步：
+
+- 登录后收藏会写入 D1
+- 换浏览器、换设备后仍然保留
+- 收藏顺序也会一起保存
+- 未登录或未启用 Access 时，会自动降级到本地缓存
+
+## 如果不启用 Zero Trust，会有什么影响
+
+可以正常部署和访问，但会有这些变化：
+
+- 页面本身仍然能打开
+- 工具列表、分类页、搜索等功能照常可用
+- 访问 `/api/me` 会返回 `401`
+- 访问 `/api/favorites` 会返回 `401`
+- 收藏无法同步到云端，只会保存在本地浏览器
+- 换浏览器或换设备后，收藏会丢失
+- 退出登录入口是 Access 提供的，没有 Access 时基本没有意义
+
+也就是说：
+
+- **不启用 Zero Trust，不影响站点部署和使用**
+- **主要影响是登录控制和跨浏览器收藏同步**
+
+如果你的需求只是公开展示，或者不在意收藏跨设备同步，这样也能用。
+
+## 本地开发
+
+### 安装依赖
 
 ```sh
-docker run -d --name it-tools --restart unless-stopped -p 8080:80 corentinth/it-tools:latest
+pnpm install
 ```
 
-**From github packages:**
+### 本地启动
 
 ```sh
-docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest
+pnpm dev
 ```
 
-**Other solutions:**
+### 构建生产版本
 
-- [Cloudron](https://www.cloudron.io/store/tech.ittools.cloudron.html)
-- [Tipi](https://www.runtipi.io/docs/apps-available)
-- [Unraid](https://unraid.net/community/apps?q=it-tools)
+```sh
+pnpm build
+```
 
-## Contribute
+### 运行单元测试
 
-### Recommended IDE Setup
+```sh
+pnpm test
+```
 
-[VSCode](https://code.visualstudio.com/) with the following extensions:
+### 代码检查
 
-- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
-- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+```sh
+pnpm lint
+```
+
+## Cloudflare 部署建议
+
+如果你准备把这个项目部署到自己的 Cloudflare 账号，建议按这个顺序做：
+
+1. 创建 Cloudflare Pages 项目
+2. 将构建输出目录设为 `dist`
+3. 在 Pages 项目里绑定 D1 数据库
+4. 给自定义域名加上 DNS 解析
+5. 按需开启 Cloudflare Access
+6. 在 Access 中配置允许访问的邮箱或邮箱组
+
+### 推荐配置
+
+- Pages 项目名：`it-tools`
+- D1 数据库名：`it-tools-favorites`
+- 生产分支：`main`
+- 访问域名：自定义域名或 `*.pages.dev`
+
+### Access 说明
+
+如果你想限制谁能用这个站点，最简单的做法就是：
+
+- 在 Zero Trust 里创建 self-hosted app
+- 把站点域名加进去
+- 配置允许访问的邮箱，或者允许的 IdP 组
+
+如果你只想让站点公开，不做登录限制，也可以不启用 Access。
+
+## 创建新工具
+
+如果要新增一个工具，可以运行：
+
+```sh
+pnpm run script:create:tool my-tool-name
+```
+
+脚本会在 `src/tools` 下生成基础文件，并自动把它挂到工具注册中。然后你只需要把它放到对应分类里，再完善具体实现。
+
+## 贡献
+
+### 推荐编辑器设置
+
+建议使用 [VSCode](https://code.visualstudio.com/) 并安装这些扩展：
+
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [i18n Ally](https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally)
 
-with the following settings:
+推荐设置：
 
 ```json
 {
@@ -71,74 +178,22 @@ with the following settings:
 }
 ```
 
-### Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-### Project Setup
+### 项目开发
 
 ```sh
 pnpm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 pnpm dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
 pnpm build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
 pnpm test
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
 pnpm lint
 ```
 
-### Create a new tool
+## 致谢
 
-To create a new tool, there is a script that generate the boilerplate of the new tool, simply run:
-
-```sh
-pnpm run script:create:tool my-tool-name
-```
-
-It will create a directory in `src/tools` with the correct files, and a the import in `src/tools/index.ts`. You will just need to add the imported tool in the proper category and develop the tool.
-
-## Contributors
-
-Big thanks to all the people who have already contributed!
+感谢所有贡献者。
 
 [![contributors](https://contrib.rocks/image?repo=corentinth/it-tools&refresh=1)](https://github.com/corentinth/it-tools/graphs/contributors)
 
-## Credits
+## 许可证
 
-Coded with ❤️ by [Corentin Thomasset](https://corentin.tech?utm_source=it-tools&utm_medium=readme).
-
-This project is continuously deployed using [vercel.com](https://vercel.com).
-
-Contributor graph is generated using [contrib.rocks](https://contrib.rocks/preview?repo=corentinth/it-tools).
-
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=345793&theme=light" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=345793&theme=light&period=daily" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-## License
-
-This project is under the [GNU GPLv3](LICENSE).
+本项目采用 [GNU GPLv3](LICENSE) 许可证。

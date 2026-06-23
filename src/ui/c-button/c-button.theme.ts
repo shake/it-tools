@@ -25,7 +25,7 @@ function createState({
   };
 }
 
-function createTheme({ style }: { style: 'light' | 'dark' }) {
+function createTheme({ style }: { style: 'light' | 'warm' | 'dark' }) {
   const theme = appThemes[style];
 
   return {
@@ -102,4 +102,5 @@ function createTheme({ style }: { style: 'light' | 'dark' }) {
 export const { useTheme } = defineThemes({
   dark: createTheme({ style: 'dark' }),
   light: createTheme({ style: 'light' }),
+  warm: createTheme({ style: 'warm' }),
 });

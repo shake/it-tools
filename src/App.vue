@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router';
 import { NGlobalStyle, NMessageProvider, NNotificationProvider, darkTheme } from 'naive-ui';
-import { darkThemeOverrides, lightThemeOverrides } from './themes';
+import { darkThemeOverrides, lightThemeOverrides, warmThemeOverrides } from './themes';
 import { layouts } from './layouts';
 import { useStyleStore } from './stores/style.store';
 
@@ -9,8 +9,18 @@ const route = useRoute();
 const layout = computed(() => route?.meta?.layout ?? layouts.base);
 const styleStore = useStyleStore();
 
-const theme = computed(() => (styleStore.isDarkTheme ? darkTheme : null));
-const themeOverrides = computed(() => (styleStore.isDarkTheme ? darkThemeOverrides : lightThemeOverrides));
+const theme = computed(() => (styleStore.themeMode === 'dark' ? darkTheme : null));
+const themeOverrides = computed(() => {
+  if (styleStore.themeMode === 'dark') {
+    return darkThemeOverrides;
+  }
+
+  if (styleStore.themeMode === 'warm') {
+    return warmThemeOverrides;
+  }
+
+  return lightThemeOverrides;
+});
 
 const { locale } = useI18n();
 const localeStorage = useStorage('locale', 'zh');
